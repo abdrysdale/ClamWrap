@@ -2,15 +2,22 @@
 
 # Default values and file locations
 DESC="Files scanned"
-dir_file="/home/al/Programs/clamprog/default_dirs.txt"
 quarantine_dir="/home/al/.quarantine"
+SCAN_FILE="/home/al/Programs/clamprog/scan_files"
+OLD_DATE_FILE="/home/al/Programs/clamprog/old_date"
+
+# Calculates date since last scanned
+OLD_DATE=$(cat ${OLD_DATE_FILE})
+NEW_DATE=$(date +%s)
+delta=$((1+($NEW_DATE - $OLD_DATE)/(24*60*60)))
 
 # If no argument is passed scans predefined dirs
 if [ $# -eq 0 ]
 then
-	SCAN_DIR="$(cat ${dir_file} | tr '\n' ' ')"
+	find / -ctime -${delta} -type f -print > ${SCAN_FILE}
+	SCAN_LOC="-f ${SCAN_FILE}"
 else
-	SCAN_DIR=${1}
+	SCAN_LOC="-r ${1}"
 fi
 	
 # Second argument (if passed) is the quarantine folder
@@ -22,7 +29,14 @@ else
 fi
 
 # Gets the total count (for progress bar)
-COUNT=$(find ${SCAN_DIR} -type f -print | wc -l)
+COUNT=$(cat ${SCAN_FILE} | wc -l)
 
 # Scans the dirs and displays a progress bar
-clamscan -r --move=${DIR} ${SCAN_DIR} | tqdm --total ${COUNT} --desc ${DESC} >/dev/null
+clamscan --move=${DIR} ${SCAN_LOC} | tqdm --total ${COUNT} --desc ${DESC} >/dev/null
+
+# Updates files and deletes scan files
+echo "${NEW_DATE}" > ${OLD_DATE_FILE}
+rm ${SCAN_FILE}
+
+echo "Virus found: $(ls ${DIR} | wc -l)"
+rm ${DIR}/*
