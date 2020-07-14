@@ -2,9 +2,9 @@
 
 # Default values and file locations
 DESC="Files scanned"
-SCAN_FILE="/home/al/Programs/clamprog/scan_files"
-OLD_DATE_FILE="/home/al/Programs/clamprog/old_date"
-LOG_FILE="/home/al/Logs/clamprog.log"
+SCAN_FILE="~/Programs/clamprog/scan_files"
+OLD_DATE_FILE="~/Programs/clamprog/old_date"
+LOG_FILE="~/Logs/clamprog.log"
 
 # Calculates date since last scanned
 OLD_DATE=$(cat ${OLD_DATE_FILE})
