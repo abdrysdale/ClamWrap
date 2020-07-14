@@ -1,9 +1,0 @@
-/home/al/.cache/
-/home/al/Downloads/
-/home/al/Dropbox/
-/home/al/.dotnet/
-/home/al/Mail/
-/home/al/.mozilla/
-/home/al/.mutt/
-/home/al/.tgcli/
-/home/al/.telegram-cli/
