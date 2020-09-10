@@ -2,9 +2,17 @@
 
 # Default values and file locations
 DESC="Files scanned"
-SCAN_FILE="${HOME}/Programs/clamprog/scan_files"
-OLD_DATE_FILE="${HOME}/Programs/clamprog/old_date"
-LOG_FILE="${HOME}/Logs/clamprog.log"
+CLAM_DIR="${HOME}/.clamwrap"
+SCAN_FILE="${CLAM_DIR}/scan_files"
+OLD_DATE_FILE="${CLAM_DIR}/old_date"
+LOG_FILE="${CLAM_DIR}/scan.log"
+
+# Creates clamwrap dir if needed
+if [ ! -d ${CLAM_DIR} ]
+then
+	mkdir ${CLAM_DIR}
+	echo "0" > ${OLD_DATE_FILE}
+fi
 
 # Calculates date since last scanned
 OLD_DATE=$(cat ${OLD_DATE_FILE})
