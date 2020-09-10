@@ -17,6 +17,8 @@ It then scans only those files and uses a tqdm to provide a progress bar.
 Logs and the last scan date (old_date) are stored in the .clamwrap directory.
 A text file containing all the files to be scanned is created at the beginning of the scan and deleted at the end, hence if the scan is aborted it will not be deleted. 
 
+Clamwrap can also be used for the progress bar alone by passing the folder or file to scan as a command line argument.
+
 # Notes
 
 The first scan takes a very very very long time.
