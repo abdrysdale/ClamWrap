@@ -1,4 +1,4 @@
-#!/bin/bash
+#! /usr/bin/env sh
 
 # Default values and file locations
 DESC="Files scanned"
@@ -11,6 +11,9 @@ LOG_FILE="${CLAM_DIR}/scan.log"
 if [ ! -d ${CLAM_DIR} ]
 then
 	mkdir ${CLAM_DIR}
+fi
+if [ ! -e ${OLD_DATE_FILE} ]
+then
 	echo "0" > ${OLD_DATE_FILE}
 fi
 
